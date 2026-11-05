@@ -1,0 +1,6 @@
+{
+  "name": "QUARTUR - Clear and Simple Insurance",
+  "description": "Clear, reliable, and simple life, property, auto, and retirement insurance portal with interactive quote tools, agent finder, and resources.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
