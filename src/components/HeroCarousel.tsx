@@ -235,35 +235,44 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onCtaClick }) => {
 
           {/* Hero Button & Navigation Dock */}
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            {/* Animated Emoji Pop CTA button */}
-            <button
-              onClick={(e) => handleCtaPress(e, slide.id, slide.ctaLink)}
-              type="button"
-              className={`emoji-btn ${isPopping ? 'popping' : ''} inline-flex items-center gap-2.5 font-condensed tracking-wider font-bold text-sm lg:text-base px-6 py-2.5 rounded-full uppercase cursor-pointer shadow-md border transition-all duration-150 ${getButtonClasses()}`}
-            >
-              {currentSlideIndex === 2 ? (
-                <>
-                  <GooglePlayIcon className="w-5 h-5 flex-shrink-0 drop-shadow-xs" />
-                  <span>Google Play</span>
-                </>
-              ) : (
-                <>
-                  <span className="btn-emoji">{currentSlideIndex === 1 ? '🌟' : '🎓'}</span>
-                  <span>{slide.ctaText}</span>
-                </>
-              )}
+            {currentSlideIndex === 0 ? (
+              <button
+                className="glow-on-hover font-condensed tracking-wider font-bold text-sm lg:text-base px-6 py-2.5 rounded-full uppercase cursor-pointer transition-all duration-150"
+                type="button"
+                onClick={() => onCtaClick(slide.id)}
+              >
+                Enroll Now!
+              </button>
+            ) : currentSlideIndex === 2 ? (
+              <button
+                className="glow-on-hover font-condensed tracking-wider font-bold text-sm lg:text-base px-6 py-2.5 rounded-full uppercase cursor-pointer transition-all duration-150 inline-flex items-center gap-2.5"
+                type="button"
+                onClick={(e) => handleCtaPress(e, slide.id, slide.ctaLink)}
+              >
+                <GooglePlayIcon className="w-5 h-5 flex-shrink-0 drop-shadow-xs" />
+                <span>Google Play</span>
+              </button>
+            ) : (
+              <button
+                onClick={(e) => handleCtaPress(e, slide.id, slide.ctaLink)}
+                type="button"
+                className={`emoji-btn ${isPopping ? 'popping' : ''} inline-flex items-center gap-2.5 font-condensed tracking-wider font-bold text-sm lg:text-base px-6 py-2.5 rounded-full uppercase cursor-pointer shadow-md border transition-all duration-150 ${getButtonClasses()}`}
+              >
+                <span className="btn-emoji">🌟</span>
+                <span>{slide.ctaText}</span>
 
-              {/* Floating reaction particles */}
-              {floatingParticles.map((particle) => (
-                <span
-                  key={particle.id}
-                  className="floating-emoji"
-                  style={{ left: `${particle.x}px`, top: '-5px' }}
-                >
-                  {particle.emoji}
-                </span>
-              ))}
-            </button>
+                {/* Floating reaction particles */}
+                {floatingParticles.map((particle) => (
+                  <span
+                    key={particle.id}
+                    className="floating-emoji"
+                    style={{ left: `${particle.x}px`, top: '-5px' }}
+                  >
+                    {particle.emoji}
+                  </span>
+                ))}
+              </button>
+            )}
 
             {/* Slide Navigation Dock */}
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-full border shadow-sm transition-colors duration-300 ${getDockClasses()}`}>

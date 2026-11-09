@@ -453,7 +453,7 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
                 >
                   <div className={`circle ${isFlying ? 'rotateCircle' : ''}`}>
                     <svg
-                      className={`plane-icon w-4 h-4 fill-white ${isFlying ? '' : 'hide'}`}
+                      className={`plane-icon w-4 h-4 fill-[#fbc232] text-[#fbc232] ${isFlying ? '' : 'hide'}`}
                       viewBox="0 0 512 512"
                       aria-hidden="true"
                     >

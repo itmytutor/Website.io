@@ -128,11 +128,25 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
     }
   ];
 
-  const renderTeacherCard = (teacher: Agent) => (
-    <div
-      key={teacher.id}
-      className="border border-gray-200/90 rounded-sm bg-white p-5 shadow-2xs hover:shadow-md hover:border-[#2b5da6]/50 transition duration-200 flex flex-col sm:flex-row gap-5"
-    >
+  const renderTeacherCard = (
+    teacher: Agent,
+    cardBorderClass: string = 'border border-gray-200/90 hover:border-[#2b5da6]/50'
+  ) => {
+    let customStyle: React.CSSProperties | undefined = undefined;
+    if (cardBorderClass.includes('#2b5da6')) {
+      customStyle = { borderColor: '#2b5da6', borderWidth: '2px', borderStyle: 'solid' };
+    } else if (cardBorderClass.includes('#49bc45')) {
+      customStyle = { borderColor: '#49bc45', borderWidth: '2px', borderStyle: 'solid' };
+    } else if (cardBorderClass.includes('#fbc232')) {
+      customStyle = { borderColor: '#fbc232', borderWidth: '2px', borderStyle: 'solid' };
+    }
+
+    return (
+      <div
+        key={teacher.id}
+        className={`${cardBorderClass} rounded-sm bg-white p-5 shadow-2xs hover:shadow-md transition duration-200 flex flex-col sm:flex-row gap-5`}
+        style={customStyle}
+      >
       {/* Teacher Photo */}
       <div className="shrink-0 flex sm:flex-col items-center">
         <img
@@ -209,7 +223,8 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
         )}
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <div className="w-full bg-white flex flex-col font-sans">
@@ -325,13 +340,16 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
         {/* Faculty & Staff */}
         <section className="space-y-6">
           <div>
-            <h2 className="font-condensed text-2xl lg:text-3xl font-bold text-[#2b5da6] uppercase tracking-tight">
+            <h2
+              className="font-condensed text-2xl lg:text-3xl font-bold text-[#fbc232] uppercase tracking-tight"
+              style={{ color: '#fbc232' }}
+            >
               Faculty & Staff
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredTeachers.map(renderTeacherCard)}
+            {featuredTeachers.map((teacher) => renderTeacherCard(teacher, 'border-2 border-[#fbc232]'))}
           </div>
         </section>
 
@@ -347,14 +365,17 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {myTutorTeachers.map(renderTeacherCard)}
+            {myTutorTeachers.map((teacher) => renderTeacherCard(teacher, 'border-2 border-[#2b5da6]'))}
           </div>
         </section>
 
         {/* Lower Part: The GiftEd Teachers */}
         <section className="space-y-6 pt-4 border-t border-gray-100">
           <div>
-            <h2 className="font-condensed text-2xl lg:text-3xl font-bold text-[#2b5da6] uppercase tracking-tight">
+            <h2
+              className="font-condensed text-2xl lg:text-3xl font-bold text-[#69bc45] uppercase tracking-tight"
+              style={{ color: '#69bc45' }}
+            >
               The GiftEd Teachers
             </h2>
             <p className="text-xs text-gray-500 mt-1">
@@ -363,7 +384,7 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {giftedTeachers.map(renderTeacherCard)}
+            {giftedTeachers.map((teacher) => renderTeacherCard(teacher, 'border-2 border-[#49bc45]'))}
           </div>
         </section>
       </div>

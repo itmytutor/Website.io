@@ -29,14 +29,37 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
   const [notes, setNotes] = useState('');
   const [requestSubmitted, setRequestSubmitted] = useState(false);
   const [bookingRef, setBookingRef] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFlying, setIsFlying] = useState(false);
+  const [isButtonChecked, setIsButtonChecked] = useState(false);
+  const [buttonText, setButtonText] = useState('Submit');
 
   const handleSubmitBooking = (e: React.FormEvent) => {
     e.preventDefault();
-    if (learnerName && learnerAge) {
+    if (!learnerName.trim() || !learnerAge.trim()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setIsFlying(true);
+    setIsButtonChecked(false);
+    setButtonText('Submit');
+
+    setTimeout(() => {
+      setIsFlying(false);
+    }, 2750);
+
+    setTimeout(() => {
+      setIsButtonChecked(true);
+      setButtonText('Submitted');
+    }, 3000);
+
+    setTimeout(() => {
       const ref = `TTR-${Math.floor(100000 + Math.random() * 900000)}`;
       setBookingRef(ref);
       setRequestSubmitted(true);
-    }
+      setIsSubmitting(false);
+    }, 3400);
   };
 
   return (
@@ -192,7 +215,15 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
               </p>
               <button
                 type="button"
-                onClick={() => setRequestSubmitted(false)}
+                onClick={() => {
+                  setRequestSubmitted(false);
+                  setIsFlying(false);
+                  setIsButtonChecked(false);
+                  setButtonText('Submit');
+                  setLearnerName('');
+                  setLearnerAge('');
+                  setNotes('');
+                }}
                 className="text-xs font-condensed font-bold uppercase text-emerald-700 hover:underline cursor-pointer"
               >
                 Submit Another Request
@@ -265,9 +296,19 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
                 </span>
                 <button
                   type="submit"
-                  className="bg-[#fbc232] hover:bg-[#eab327] text-[#2a2208] font-condensed text-xs uppercase font-bold px-6 py-2 rounded-xs cursor-pointer border border-[#dfab28] shadow-xs"
+                  disabled={isSubmitting}
+                  className={`send-btn yellow-btn ${isButtonChecked ? 'checked' : ''}`}
                 >
-                  Submit Intake Form
+                  <div className={`circle ${isFlying ? 'rotateCircle' : ''}`}>
+                    <svg
+                      className={`plane-icon w-4 h-4 fill-[#000000] text-[#000000] ${isFlying ? '' : 'hide'}`}
+                      viewBox="0 0 512 512"
+                      aria-hidden="true"
+                    >
+                      <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V392c0-2.5 .4-4.9 1.1-7.2l202-232.2-250.4 193c-6.8 5.3-15.5 7.7-24 6.7L18.4 344.4C7.1 343.1-1.8 334.4 .2 323.2s9.7-19.3 20.8-21.2l448-80c10.3-1.8 20.9 2.1 27.1 10.2l2 2.6z" />
+                    </svg>
+                  </div>
+                  <span>{buttonText}</span>
                 </button>
               </div>
             </form>

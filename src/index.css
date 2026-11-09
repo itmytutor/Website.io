@@ -170,6 +170,25 @@ body {
   background-color: #50c878;
 }
 
+.send-btn.yellow-btn {
+  background-color: #fbc232;
+  color: #2a2208;
+  border: 1px solid #dfab28;
+  box-shadow: 0 0 0 #50c878 inset, 0 2px 6px rgba(251, 194, 50, 0.4);
+}
+
+.send-btn.yellow-btn:hover {
+  background-color: #eab327;
+  box-shadow: 0 0 0 #50c878 inset, 0 4px 10px rgba(251, 194, 50, 0.5);
+}
+
+.send-btn.yellow-btn.checked {
+  box-shadow: 200px 0 0 #50c878 inset, 0 2px 6px rgba(80, 200, 120, 0.6);
+  background-color: #50c878;
+  color: #ffffff;
+  border-color: #50c878;
+}
+
 .send-btn:disabled {
   cursor: not-allowed;
   opacity: 0.95;
@@ -192,6 +211,13 @@ body {
   top: 50%;
   transform: translateY(-50%) rotate(-25deg);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  fill: #fbc232;
+  color: #fbc232;
+}
+
+.send-btn.yellow-btn .plane-icon {
+  fill: #000000;
+  color: #000000;
 }
 
 .send-btn .rotateCircle {
@@ -211,3 +237,142 @@ body {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+/* Glow Button Animation (Carousel Slide 1 - Always glowing, yellow #fbc232, pill rounded) */
+.glow-on-hover {
+  border: none;
+  outline: none;
+  color: #0f172a;
+  background: #fbc232;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(251, 194, 50, 0.4);
+}
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #2b5da6, #69bc45, #fbc232, #2b5da6, #69bc45);
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  animation: glowing 16s linear infinite;
+  opacity: 1;
+  border-radius: 9999px;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fbc232;
+  left: 0;
+  top: 0;
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+.glow-on-hover:hover:after {
+  background: #eab327;
+}
+
+.glow-on-hover:active {
+  color: #0f172a;
+  transform: scale(0.96);
+}
+
+.glow-on-hover:active:after {
+  background: #d49e1e;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* Glow-on-Hover Button Animation (Carousel Slide 3 - Dark #111 with hover rainbow glow) */
+.glow-on-hover-dark {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff !important;
+  background: #111 !important;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
+}
+
+.glow-on-hover-dark:before {
+  content: '';
+  background: linear-gradient(45deg, #2b5da6, #69bc45, #fbc232, #ebeceb);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px !important;
+}
+
+.glow-on-hover-dark:active {
+  color: #000 !important;
+}
+
+.glow-on-hover-dark:active:after {
+  background: transparent !important;
+}
+
+.glow-on-hover-dark:hover:before {
+  opacity: 1 !important;
+}
+
+.glow-on-hover-dark:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111 !important;
+  left: 0;
+  top: 0;
+  border-radius: 10px !important;
+}
+
+
+
