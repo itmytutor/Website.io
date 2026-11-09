@@ -28,9 +28,17 @@ interface HeroCarouselProps {
   onCtaClick: (slideId: string) => void;
 }
 
+interface FloatingParticle {
+  id: number;
+  x: number;
+  emoji: string;
+}
+
 export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onCtaClick }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isPopping, setIsPopping] = useState(false);
+  const [floatingParticles, setFloatingParticles] = useState<FloatingParticle[]>([]);
 
   const slide = HERO_SLIDES[currentSlideIndex];
 
@@ -40,6 +48,29 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onCtaClick }) => {
 
   const handleNext = () => {
     setCurrentSlideIndex((prev) => (prev === HERO_SLIDES.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleCtaPress = (e: React.MouseEvent<HTMLButtonElement>, slideId: string, ctaLink?: string) => {
+    setIsPopping(true);
+    setTimeout(() => setIsPopping(false), 300);
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(10, Math.min(rect.width - 20, e.clientX - rect.left));
+    const emojis = ['✨', '🌟', '🎉', '⭐', '🎈'];
+    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+    const newId = Date.now() + Math.random();
+
+    setFloatingParticles((prev) => [...prev, { id: newId, x, emoji: randomEmoji }]);
+
+    setTimeout(() => {
+      setFloatingParticles((prev) => prev.filter((p) => p.id !== newId));
+    }, 800);
+
+    if (ctaLink) {
+      window.open(ctaLink, '_blank', 'noopener,noreferrer');
+    } else {
+      onCtaClick(slideId);
+    }
   };
 
   // Auto-slide effect (advances every 5 seconds, pauses when hovered)
@@ -204,32 +235,35 @@ export const HeroCarousel: React.FC<HeroCarouselProps> = ({ onCtaClick }) => {
 
           {/* Hero Button & Navigation Dock */}
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            {/* CTA button (links to Google Play app or fires onCtaClick) */}
-            {slide.ctaLink ? (
-              <a
-                href={slide.ctaLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center gap-2.5 font-condensed tracking-wider text-sm lg:text-base px-6 py-2.5 rounded-full uppercase transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-[0.98] shadow-md border ${getButtonClasses()}`}
-              >
-                {currentSlideIndex === 2 ? (
-                  <>
-                    <GooglePlayIcon className="w-5 h-5 flex-shrink-0 drop-shadow-xs" />
-                    <span>Google Play</span>
-                  </>
-                ) : (
+            {/* Animated Emoji Pop CTA button */}
+            <button
+              onClick={(e) => handleCtaPress(e, slide.id, slide.ctaLink)}
+              type="button"
+              className={`emoji-btn ${isPopping ? 'popping' : ''} inline-flex items-center gap-2.5 font-condensed tracking-wider font-bold text-sm lg:text-base px-6 py-2.5 rounded-full uppercase cursor-pointer shadow-md border transition-all duration-150 ${getButtonClasses()}`}
+            >
+              {currentSlideIndex === 2 ? (
+                <>
+                  <GooglePlayIcon className="w-5 h-5 flex-shrink-0 drop-shadow-xs" />
+                  <span>Google Play</span>
+                </>
+              ) : (
+                <>
+                  <span className="btn-emoji">{currentSlideIndex === 1 ? '🌟' : '🎓'}</span>
                   <span>{slide.ctaText}</span>
-                )}
-              </a>
-            ) : (
-              <button
-                onClick={() => onCtaClick(slide.id)}
-                type="button"
-                className={`inline-flex items-center gap-2 font-condensed tracking-wider font-bold text-sm lg:text-base px-6 py-2.5 rounded-full uppercase transition-all duration-200 cursor-pointer hover:scale-[1.02] active:scale-[0.98] shadow-md border ${getButtonClasses()}`}
-              >
-                <span>{slide.ctaText}</span>
-              </button>
-            )}
+                </>
+              )}
+
+              {/* Floating reaction particles */}
+              {floatingParticles.map((particle) => (
+                <span
+                  key={particle.id}
+                  className="floating-emoji"
+                  style={{ left: `${particle.x}px`, top: '-5px' }}
+                >
+                  {particle.emoji}
+                </span>
+              ))}
+            </button>
 
             {/* Slide Navigation Dock */}
             <div className={`flex items-center gap-1.5 px-3 py-2 rounded-full border shadow-sm transition-colors duration-300 ${getDockClasses()}`}>

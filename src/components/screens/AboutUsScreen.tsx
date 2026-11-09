@@ -18,10 +18,7 @@ export const AboutUsScreen: React.FC<AboutUsScreenProps> = () => {
           <h1 className="font-condensed text-3xl lg:text-5xl font-bold tracking-tight">
             ABOUT <span className="lowercase">mytutorph</span>
           </h1>
-          <p className="mt-3 text-xs lg:text-sm text-blue-50 leading-relaxed font-body max-w-xl">
-            MyTutorPH is a dedicated educational network founded on a simple premise: every child possesses extraordinary potential when met with patience, individualized instruction, and neurodiversity-affirming support.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-wrap gap-3">
             <a
               href="https://www.facebook.com/MyTutorPhilippines"
               target="_blank"
@@ -39,38 +36,47 @@ export const AboutUsScreen: React.FC<AboutUsScreenProps> = () => {
       <div className="p-6 lg:p-10 space-y-10">
         {/* Core Pillars */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb] shadow-xs">
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#2b5da6] flex items-center justify-center mb-3">
-              <Heart className="w-5 h-5" />
+          <div
+            className="bg-[#2b5da6] text-white p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#2b5da6' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#2b5da6] flex items-center justify-center mb-4 shadow-xs">
+              <Heart className="w-5 h-5 fill-current" />
             </div>
-            <h3 className="font-condensed text-lg font-bold text-[#35363a] uppercase mb-2">
+            <h3 className="font-condensed text-lg font-bold text-white uppercase mb-2">
               Affirming & Nurturing
             </h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-blue-100 leading-relaxed">
               We create emotionally safe, judgment-free learning spaces where children feel valued, respected, and encouraged to embrace their unique neurodevelopmental profiles.
             </p>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb] shadow-xs">
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#2b5da6] flex items-center justify-center mb-3">
+          <div
+            className="bg-[#69bc45] text-white p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#69bc45' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#69bc45] flex items-center justify-center mb-4 shadow-xs">
               <Award className="w-5 h-5" />
             </div>
-            <h3 className="font-condensed text-lg font-bold text-[#35363a] uppercase mb-2">
+            <h3 className="font-condensed text-lg font-bold text-white uppercase mb-2">
               Certified Specialists
             </h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-emerald-50 leading-relaxed">
               Our team consists of licensed professional teachers (LPT), SPED educators, educational diagnosticians, and behavioral mentors with years of hands-on classroom and clinic experience.
             </p>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb] shadow-xs">
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#2b5da6] flex items-center justify-center mb-3">
+          <div
+            className="bg-[#fbc232] text-gray-900 p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#fbc232' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#aa7800] flex items-center justify-center mb-4 shadow-xs">
               <BookOpen className="w-5 h-5" />
             </div>
-            <h3 className="font-condensed text-lg font-bold text-[#35363a] uppercase mb-2">
+            <h3 className="font-condensed text-lg font-bold text-gray-900 uppercase mb-2">
               Evidence-Based Methods
             </h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-amber-950 leading-relaxed font-medium">
               From Orton-Gillingham multisensory literacy to structured cognitive interventions and play-based inquiry, our instructional roadmaps produce measurable confidence and retention.
             </p>
           </div>

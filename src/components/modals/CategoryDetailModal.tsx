@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Check, Phone, ArrowRight, BookOpen } from 'lucide-react';
+import { X, Check, Phone, ArrowRight } from 'lucide-react';
 
 interface CategoryItemInfo {
   id: string;
@@ -58,32 +58,27 @@ export const CategoryDetailModal: React.FC<CategoryDetailModalProps> = ({
         <div className="p-6 overflow-y-auto space-y-5 text-gray-700 text-sm">
           {item ? (
             <>
-              <div>
-                <h4 className="font-condensed text-base font-bold text-[#35363a] uppercase mb-1">
-                  Program Description & Objectives
-                </h4>
-                <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">
-                  {item.desc}
-                </p>
-              </div>
 
-              {/* Pricing & Typical Limits Box */}
-              <div className="grid grid-cols-2 gap-3 bg-[#f5f5f5] p-3.5 border border-gray-200">
+              {/* Pricing Box */}
+              <div className="bg-[#f5f5f5] p-3.5 border border-gray-200">
                 <div>
-                  <span className="text-[10px] uppercase font-condensed text-gray-500 font-bold block">
-                    Starting Session Fee
+                  <span className="text-[10px] uppercase font-condensed text-gray-500 font-bold block mb-1">
+                    Session Fee
                   </span>
-                  <span className="font-condensed text-2xl font-bold text-[#35363a]">
-                    {item.startingAt}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-condensed text-gray-500 font-bold block">
-                    Format & Scope
-                  </span>
-                  <span className="font-condensed text-sm font-semibold text-sky-800 block mt-1">
-                    {item.typicalCoverage}
-                  </span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-condensed text-2xl font-bold text-[#35363a]">
+                      {item.startingAt}
+                    </span>
+                    <span className="font-condensed text-sm font-semibold text-gray-600">
+                      {item.typicalCoverage?.toLowerCase().includes('1 time') ||
+                      item.typicalCoverage?.toLowerCase().includes('one time') ||
+                      item.typicalCoverage?.toLowerCase().includes('assessment')
+                        ? 'One Time Fee'
+                        : item.typicalCoverage === 'Per Month'
+                        ? 'Per Month'
+                        : 'Per Hour'}
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -124,11 +119,11 @@ export const CategoryDetailModal: React.FC<CategoryDetailModalProps> = ({
         {/* Footer */}
         <div className="bg-[#f4f4f4] border-t border-gray-200 px-6 py-3 flex items-center justify-between">
           <a
-            href="tel:+63289201456"
+            href="tel:+639159937065"
             className="flex items-center gap-1.5 text-xs font-bold text-[#4c4e53] hover:text-sky-700"
           >
             <Phone className="w-3.5 h-3.5 text-[#8ec3eb]" />
-            <span>(02) 8920 1456</span>
+            <span>+63 915 993 7065</span>
           </a>
           <div className="flex items-center gap-2">
             <button

@@ -46,12 +46,9 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
         <span className="text-[10px] uppercase font-condensed tracking-wider font-bold text-[#6e5008] block mb-1">
           Specialized Educational Programs & Tutoring
         </span>
-        <h1 className="font-condensed text-3xl lg:text-4xl font-bold tracking-tight text-[#261f06]">
-          <span className="lowercase">mytutorph</span> SERVICES
+        <h1 className="font-condensed text-3xl lg:text-4xl font-bold tracking-tight text-[#261f06] uppercase">
+          Services
         </h1>
-        <p className="mt-2 text-xs lg:text-sm text-[#382c09] max-w-xl font-body leading-relaxed">
-          Explore our complete range of SPED programs, diagnostic assessments, early intervention, play-based modules, and subject-focused tutoring tailored to your child’s goals.
-        </p>
       </section>
 
       <div className="p-6 lg:p-10 space-y-10">
@@ -80,66 +77,91 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
               </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {category.items.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() =>
-                    onSelectItem({
-                      ...item,
-                      category: category.title,
-                    })
-                  }
-                  className="border border-gray-200 p-4 bg-white hover:border-[#fbc232] hover:shadow-sm transition cursor-pointer flex flex-col justify-between group shadow-xs"
-                >
-                  <div>
-                    <div className="flex items-start justify-between mb-1.5 gap-2">
-                      <h3 className="font-condensed text-base font-bold text-[#35363a] group-hover:text-[#2b5da6] uppercase whitespace-pre-line leading-tight">
-                        {item.name}
-                      </h3>
-                      <span className="text-[10px] uppercase font-condensed font-bold text-[#2a2208] bg-[#fbc232]/30 px-2 py-0.5 rounded-xs border border-[#fbc232]/50 shrink-0">
-                        {item.startingAt}
+              {category.items.map((item, itemIdx) => {
+                const strokeBorderClass =
+                  itemIdx === 0
+                    ? 'border-2 border-[#2b5da6]'
+                    : itemIdx === 1
+                    ? 'border-2 border-[#69bc45]'
+                    : itemIdx === 2
+                    ? 'border-2 border-[#fbc232]'
+                    : itemIdx === 3
+                    ? 'border-2 border-[#ebeceb]'
+                    : 'border border-gray-200';
+
+                const strokeStyle =
+                  itemIdx === 0
+                    ? { borderColor: '#2b5da6', border: '2px solid #2b5da6' }
+                    : itemIdx === 1
+                    ? { borderColor: '#69bc45', border: '2px solid #69bc45' }
+                    : itemIdx === 2
+                    ? { borderColor: '#fbc232', border: '2px solid #fbc232' }
+                    : itemIdx === 3
+                    ? { borderColor: '#ebeceb', border: '2px solid #ebeceb' }
+                    : undefined;
+
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() =>
+                      onSelectItem({
+                        ...item,
+                        category: category.title,
+                      })
+                    }
+                    className={`${strokeBorderClass} p-4 bg-white hover:shadow-md transition cursor-pointer flex flex-col justify-between group shadow-xs`}
+                    style={strokeStyle}
+                  >
+                    <div>
+                      <div className="flex items-start justify-between mb-1.5 gap-2">
+                        <h3 className="font-condensed text-base font-bold text-[#35363a] group-hover:text-[#2b5da6] uppercase whitespace-pre-line leading-tight">
+                          {item.name}
+                        </h3>
+                        <span className="text-[10px] uppercase font-condensed font-bold text-[#2a2208] bg-[#fbc232]/30 px-2 py-0.5 rounded-xs border border-[#fbc232]/50 shrink-0">
+                          {item.startingAt}
+                        </span>
+                      </div>
+
+                      {item.subjects && item.subjects.length > 0 && (
+                        <div className="mt-2 mb-3">
+                          <p className="text-[11px] font-bold text-gray-700 uppercase tracking-wide font-condensed mb-1.5">
+                            Subject :
+                          </p>
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {item.subjects.map((subj, sIdx) => (
+                              <div
+                                key={sIdx}
+                                className="bg-gray-50 border border-gray-200/90 rounded-xs px-2 py-1 text-[11px] font-medium text-gray-700 flex items-center shadow-2xs"
+                              >
+                                <span className="w-1.5 h-1.5 rounded-full bg-[#69bc45] mr-1.5 shrink-0" />
+                                <span className="truncate">{subj}</span>
+                              </div>
+                            ))}
+                          </div>
+                          {item.otherSubjectsText && (
+                            <p className="text-[11px] text-gray-500 font-medium mt-2 italic">
+                              {item.otherSubjectsText}
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      {item.desc && (
+                        <p className="text-xs text-gray-500 leading-relaxed mb-3">
+                          {item.desc}
+                        </p>
+                      )}
+                    </div>
+                    <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
+                      <span className="text-[11px] text-gray-400">{item.typicalCoverage}</span>
+                      <span className="text-[#2b5da6] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                        <span>Details</span>
+                        <ArrowRight className="w-3 h-3" />
                       </span>
                     </div>
-
-                    {item.subjects && item.subjects.length > 0 && (
-                      <div className="mt-2 mb-3">
-                        <p className="text-[11px] font-bold text-gray-700 uppercase tracking-wide font-condensed mb-1.5">
-                          Subject :
-                        </p>
-                        <div className="grid grid-cols-2 gap-1.5">
-                          {item.subjects.map((subj, sIdx) => (
-                            <div
-                              key={sIdx}
-                              className="bg-gray-50 border border-gray-200/90 rounded-xs px-2 py-1 text-[11px] font-medium text-gray-700 flex items-center shadow-2xs"
-                            >
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#69bc45] mr-1.5 shrink-0" />
-                              <span className="truncate">{subj}</span>
-                            </div>
-                          ))}
-                        </div>
-                        {item.otherSubjectsText && (
-                          <p className="text-[11px] text-gray-500 font-medium mt-2 italic">
-                            {item.otherSubjectsText}
-                          </p>
-                        )}
-                      </div>
-                    )}
-
-                    {item.desc && (
-                      <p className="text-xs text-gray-500 leading-relaxed mb-3">
-                        {item.desc}
-                      </p>
-                    )}
                   </div>
-                  <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-gray-400">{item.typicalCoverage}</span>
-                    <span className="text-[#2b5da6] font-bold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                      <span>Details</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
           );
@@ -239,7 +261,7 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
 
               <div className="flex items-center justify-between pt-2">
                 <span className="text-[11px] text-gray-500">
-                  Prefer a phone conversation? Call <strong>+63 (02) 8920 1456</strong>
+                  Prefer a phone conversation? Call <strong>+63 915 993 7065</strong>
                 </span>
                 <button
                   type="submit"

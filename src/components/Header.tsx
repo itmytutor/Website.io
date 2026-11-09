@@ -98,10 +98,22 @@ export const Header: React.FC<HeaderProps> = ({
               alt="MyTutorPH Official Logo"
               className="w-11 h-11 md:w-13 md:h-13 rounded-full object-cover border-2 border-[#fbc232] shadow-sm shrink-0"
             />
-            <span className="text-3xl lg:text-4xl tracking-tight lowercase font-condensed font-bold select-none">
-              <span className="text-[#2b5da6]">my</span>
-              <span className="text-[#69bc45]">tutor</span>
-              <span className="text-[#fbc232]">ph</span>
+            <span className="jumping-title text-3xl lg:text-4xl tracking-tight lowercase font-condensed font-bold select-none">
+              <span className="text-[#2b5da6] inline-flex">
+                <span className="jumping-letter" style={{ animationDelay: '0.1s' }}>m</span>
+                <span className="jumping-letter" style={{ animationDelay: '0.2s' }}>y</span>
+              </span>
+              <span className="text-[#69bc45] inline-flex">
+                <span className="jumping-letter" style={{ animationDelay: '0.3s' }}>t</span>
+                <span className="jumping-letter" style={{ animationDelay: '0.4s' }}>u</span>
+                <span className="jumping-letter" style={{ animationDelay: '0.5s' }}>t</span>
+                <span className="jumping-letter" style={{ animationDelay: '0.6s' }}>o</span>
+                <span className="jumping-letter" style={{ animationDelay: '0.7s' }}>r</span>
+              </span>
+              <span className="text-[#fbc232] inline-flex">
+                <span className="jumping-letter" style={{ animationDelay: '0.8s' }}>p</span>
+                <span className="jumping-letter" style={{ animationDelay: '0.9s' }}>h</span>
+              </span>
             </span>
           </button>
 

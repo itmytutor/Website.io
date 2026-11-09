@@ -143,7 +143,7 @@ export const INSURANCE_CATEGORIES: Record<string, ServiceCategory> = {
   spedPrograms: {
     title: 'Learning Assessment',
     items: [
-      { id: 'learning-assessment', name: 'Assessment', typicalCoverage: '1 time assessment', startingAt: '₱975 / in 1 time', desc: '' }
+      { id: 'learning-assessment', name: 'Assessment', typicalCoverage: 'One Time Fee', startingAt: '₱975', desc: '' }
     ]
   },
   assessments: {

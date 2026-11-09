@@ -232,38 +232,47 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
       <div className="p-6 lg:p-10 space-y-10">
         {/* Why Our Teachers Excel */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb]">
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#2b5da6] flex items-center justify-center mb-3">
+          <div
+            className="bg-[#2b5da6] text-white p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#2b5da6' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#2b5da6] flex items-center justify-center mb-4 shadow-xs">
               <Award className="w-5 h-5" />
             </div>
-            <h3 className="font-condensed text-lg font-bold text-[#35363a] uppercase mb-2">
+            <h3 className="font-condensed text-lg font-bold text-white uppercase mb-2">
               Licensed & SPED Trained
             </h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-blue-100 leading-relaxed">
               Every teacher is thoroughly vetted, licensed, and continuously trained in sensory integration, behavioral accommodation, and neurodiversity-affirming approaches.
             </p>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb]">
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#2b5da6] flex items-center justify-center mb-3">
+          <div
+            className="bg-[#69bc45] text-white p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#69bc45' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#69bc45] flex items-center justify-center mb-4 shadow-xs">
               <GraduationCap className="w-5 h-5" />
             </div>
-            <h3 className="font-condensed text-lg font-bold text-[#35363a] uppercase mb-2">
+            <h3 className="font-condensed text-lg font-bold text-white uppercase mb-2">
               Tailored Teaching Plans
             </h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-emerald-50 leading-relaxed">
               Our educators do not use one-size-fits-all curricula. Every instructional plan is customized to each learner's unique processing pace, strengths, and goals.
             </p>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb]">
-            <div className="w-10 h-10 rounded-full bg-blue-50 text-[#2b5da6] flex items-center justify-center mb-3">
+          <div
+            className="bg-[#fbc232] text-gray-900 p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#fbc232' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#aa7800] flex items-center justify-center mb-4 shadow-xs">
               <CheckCircle className="w-5 h-5" />
             </div>
-            <h3 className="font-condensed text-lg font-bold text-[#35363a] uppercase mb-2">
+            <h3 className="font-condensed text-lg font-bold text-gray-900 uppercase mb-2">
               Transparent Progress
             </h3>
-            <p className="text-xs text-gray-500 leading-relaxed">
+            <p className="text-xs text-amber-950 leading-relaxed font-medium">
               Teachers provide weekly debriefs and periodic developmental reports, giving parents peace of mind and actionable strategies for home practice.
             </p>
           </div>

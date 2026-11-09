@@ -21,6 +21,9 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isFlying, setIsFlying] = useState(false);
+  const [isButtonChecked, setIsButtonChecked] = useState(false);
+  const [buttonText, setButtonText] = useState('Send');
   const [lastSubmission, setLastSubmission] = useState<{
     'Parent / Guardian Full Name': string;
     'Mobile / Phone Number': string;
@@ -39,6 +42,9 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
 
     setIsSubmitting(true);
     setSubmitError(null);
+    setIsFlying(true);
+    setIsButtonChecked(false);
+    setButtonText('Send');
 
     const now = new Date();
     const formattedDate = now.toLocaleString('en-PH', {
@@ -92,13 +98,28 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
         body: formParams.toString(),
       });
 
-      setLastSubmission(receivedRecord);
-      setSubmitted(true);
+      // Complete flight rotation, turn checked with 'Sent'
+      setTimeout(() => {
+        setIsFlying(false);
+      }, 2600);
+
+      setTimeout(() => {
+        setIsButtonChecked(true);
+        setButtonText('Sent');
+      }, 2750);
+
+      setTimeout(() => {
+        setLastSubmission(receivedRecord);
+        setSubmitted(true);
+        setIsSubmitting(false);
+      }, 3100);
     } catch (err: unknown) {
       console.error('Error submitting form to Google Sheets:', err);
-      setSubmitError('Unable to submit inquiry at this moment. Please check your network connection and try again.');
-    } finally {
+      setIsFlying(false);
+      setIsButtonChecked(false);
+      setButtonText('Send');
       setIsSubmitting(false);
+      setSubmitError('Unable to submit inquiry at this moment. Please check your network connection and try again.');
     }
   };
 
@@ -120,39 +141,45 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
       <div className="p-6 lg:p-10 space-y-10">
         {/* Contact Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb] shadow-xs">
-            <div className="w-8 h-8 rounded-full bg-blue-50 text-[#35363a] flex items-center justify-center mb-3">
-              <Phone className="w-4 h-4 text-[#2b5da6]" />
+          <div
+            className="bg-[#2b5da6] text-white p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#2b5da6' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#2b5da6] flex items-center justify-center mb-4 shadow-xs">
+              <Phone className="w-5 h-5 text-[#2b5da6] fill-current" />
             </div>
-            <h3 className="font-condensed text-base font-bold text-[#35363a] uppercase mb-1">
+            <h3 className="font-condensed text-base sm:text-lg font-bold text-white uppercase mb-1">
               Admissions Hotline
             </h3>
-            <p className="text-xs text-gray-500 mb-2">Speak directly with a coordinator</p>
+            <p className="text-xs text-blue-100 mb-2">Speak directly with a coordinator</p>
             <a
               href="tel:+639159937065"
-              className="font-condensed text-lg font-bold text-[#2b5da6] hover:text-[#1c3f73] block"
+              className="font-condensed text-lg font-bold text-white hover:text-blue-200 block transition"
             >
               +63 915 993 7065
             </a>
-            <span className="text-[10px] text-gray-400 mt-1 block">
+            <span className="text-[10px] text-blue-200 mt-1 block">
               Mon - Fri: 8:00 AM - 5:00 PM
             </span>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb] shadow-xs">
-            <div className="w-8 h-8 rounded-full bg-blue-50 text-[#35363a] flex items-center justify-center mb-3">
-              <Mail className="w-4 h-4 text-[#2b5da6]" />
+          <div
+            className="bg-[#69bc45] text-white p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#69bc45' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#69bc45] flex items-center justify-center mb-4 shadow-xs">
+              <Mail className="w-5 h-5 text-[#69bc45]" />
             </div>
-            <h3 className="font-condensed text-base font-bold text-[#35363a] uppercase mb-1">
+            <h3 className="font-condensed text-base sm:text-lg font-bold text-white uppercase mb-1">
               Email Coordination
             </h3>
-            <p className="text-xs text-gray-500 mb-2">Typically answered within 3 business hours</p>
+            <p className="text-xs text-emerald-100 mb-2">Typically answered within 3 business hours</p>
             <div className="space-y-1 text-xs">
               <div>
-                <span className="text-[10px] text-gray-400 block">Email:</span>
+                <span className="text-[10px] text-emerald-100 block">Email:</span>
                 <a
                   href="mailto:admin@mytutorph.com"
-                  className="font-semibold text-gray-700 hover:text-[#2b5da6]"
+                  className="font-semibold text-white hover:text-emerald-200 underline decoration-white/40 hover:decoration-white"
                 >
                   admin@mytutorph.com
                 </a>
@@ -160,16 +187,19 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
             </div>
           </div>
 
-          <div className="border border-gray-200 p-5 bg-[#fbfbfb] shadow-xs">
-            <div className="w-8 h-8 rounded-full bg-blue-50 text-[#35363a] flex items-center justify-center mb-3">
-              <MapPin className="w-4 h-4 text-[#2b5da6]" />
+          <div
+            className="bg-[#fbc232] text-gray-900 p-6 rounded-lg shadow-sm"
+            style={{ backgroundColor: '#fbc232' }}
+          >
+            <div className="w-10 h-10 rounded-full bg-white text-[#aa7800] flex items-center justify-center mb-4 shadow-xs">
+              <MapPin className="w-5 h-5 text-[#aa7800]" />
             </div>
-            <h3 className="font-condensed text-base font-bold text-[#35363a] uppercase mb-1">
+            <h3 className="font-condensed text-base sm:text-lg font-bold text-gray-900 uppercase mb-1">
               Learning Center Hub
             </h3>
-            <p className="text-xs text-gray-500 mb-2">Main Office</p>
-            <address className="not-italic text-xs text-gray-700 space-y-0.5">
-              <p className="font-semibold">MyTutorPH Learning Center</p>
+            <p className="text-xs text-amber-950 mb-2 font-medium">Main Office</p>
+            <address className="not-italic text-xs text-amber-950 font-medium space-y-0.5">
+              <p className="font-bold text-gray-900">MyTutorPH Learning Center</p>
               <p>2/F Lucky Plaza Bldg., Burgos St.,</p>
               <p>La Paz, Iloilo City</p>
             </address>
@@ -288,6 +318,9 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
                     setSubmitted(false);
                     setSubmitError(null);
                     setLastSubmission(null);
+                    setIsFlying(false);
+                    setIsButtonChecked(false);
+                    setButtonText('Send');
                     setFormData({
                       name: '',
                       email: '',
@@ -416,19 +449,18 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#2b5da6] hover:bg-[#224d8b] disabled:bg-[#85a4d1] disabled:cursor-not-allowed text-white font-condensed text-xs uppercase font-bold px-6 py-2.5 rounded-xs flex items-center gap-1.5 cursor-pointer shadow-sm transition"
+                  className={`send-btn ${isButtonChecked ? 'checked' : ''}`}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      <span>Submitting...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Submit</span>
-                      <Send className="w-3.5 h-3.5" />
-                    </>
-                  )}
+                  <div className={`circle ${isFlying ? 'rotateCircle' : ''}`}>
+                    <svg
+                      className={`plane-icon w-4 h-4 fill-white ${isFlying ? '' : 'hide'}`}
+                      viewBox="0 0 512 512"
+                      aria-hidden="true"
+                    >
+                      <path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V392c0-2.5 .4-4.9 1.1-7.2l202-232.2-250.4 193c-6.8 5.3-15.5 7.7-24 6.7L18.4 344.4C7.1 343.1-1.8 334.4 .2 323.2s9.7-19.3 20.8-21.2l448-80c10.3-1.8 20.9 2.1 27.1 10.2l2 2.6z" />
+                    </svg>
+                  </div>
+                  <span>{buttonText}</span>
                 </button>
               </div>
             </form>
