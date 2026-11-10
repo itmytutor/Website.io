@@ -134,11 +134,11 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
   ) => {
     let customStyle: React.CSSProperties | undefined = undefined;
     if (cardBorderClass.includes('#2b5da6')) {
-      customStyle = { borderColor: '#2b5da6', borderWidth: '2px', borderStyle: 'solid' };
+      customStyle = { border: '2px solid #2b5da6', borderColor: '#2b5da6', backgroundColor: '#ffffff' };
     } else if (cardBorderClass.includes('#49bc45')) {
-      customStyle = { borderColor: '#49bc45', borderWidth: '2px', borderStyle: 'solid' };
+      customStyle = { border: '2px solid #49bc45', borderColor: '#49bc45', backgroundColor: '#ffffff' };
     } else if (cardBorderClass.includes('#fbc232')) {
-      customStyle = { borderColor: '#fbc232', borderWidth: '2px', borderStyle: 'solid' };
+      customStyle = { border: '2px solid #fbc232', borderColor: '#fbc232', backgroundColor: '#ffffff' };
     }
 
     return (
@@ -337,22 +337,6 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
           </div>
         </section>
 
-        {/* Faculty & Staff */}
-        <section className="space-y-6">
-          <div>
-            <h2
-              className="font-condensed text-2xl lg:text-3xl font-bold text-[#fbc232] uppercase tracking-tight"
-              style={{ color: '#fbc232' }}
-            >
-              Faculty & Staff
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {featuredTeachers.map((teacher) => renderTeacherCard(teacher, 'border-2 border-[#fbc232]'))}
-          </div>
-        </section>
-
         {/* Upper Part: MYTUTOR TEACHERS (2 columns x 2 rows grid) */}
         <section className="space-y-6">
           <div>
@@ -385,6 +369,22 @@ export const TeachersScreen: React.FC<TeachersScreenProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {giftedTeachers.map((teacher) => renderTeacherCard(teacher, 'border-2 border-[#49bc45]'))}
+          </div>
+        </section>
+
+        {/* Faculty & Staff */}
+        <section className="space-y-6 pt-4 border-t border-gray-100">
+          <div>
+            <h2
+              className="font-condensed text-2xl lg:text-3xl font-bold text-[#fbc232] uppercase tracking-tight"
+              style={{ color: '#fbc232' }}
+            >
+              Faculty & Staff
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {featuredTeachers.map((teacher) => renderTeacherCard(teacher, 'border-2 border-[#fbc232]'))}
           </div>
         </section>
       </div>

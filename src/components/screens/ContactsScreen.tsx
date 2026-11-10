@@ -207,7 +207,11 @@ export const ContactsScreen: React.FC<ContactsScreenProps> = ({}) => {
         </div>
 
         {/* Online Contact Message Form */}
-        <section id="inquiry-form" className="border border-gray-200 bg-white p-6 scroll-mt-20 shadow-xs">
+        <section
+          id="inquiry-form"
+          className="border-2 border-[#2b5da6] bg-white p-6 scroll-mt-20 shadow-xs"
+          style={{ borderColor: '#2b5da6', borderWidth: '2px', borderStyle: 'solid' }}
+        >
           <div className="flex items-center gap-2 mb-2">
             <GraduationCap className="w-5 h-5 text-[#2b5da6]" />
             <h2 className="font-condensed text-2xl font-bold text-[#35363a] uppercase">

@@ -191,7 +191,10 @@ export const ServicesScreen: React.FC<ServicesScreenProps> = ({
         })}
 
         {/* Online Learning Diagnostic & Program Intake Form */}
-        <section className="border border-gray-200 bg-white p-6 shadow-xs">
+        <section
+          className="border-2 border-[#2b5da6] bg-white p-6 shadow-xs"
+          style={{ borderColor: '#2b5da6', borderWidth: '2px', borderStyle: 'solid' }}
+        >
           <div className="flex items-center gap-2 mb-2">
             <FileText className="w-5 h-5 text-[#fbc232]" />
             <h2 className="font-condensed text-2xl font-bold text-[#35363a] uppercase">
